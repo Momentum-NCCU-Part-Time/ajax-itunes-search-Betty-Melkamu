@@ -1,9 +1,8 @@
 let term = "";
 const updateTerm = () => {
     term = document.getElementById("searchTerm").value;
-
     // Checks term exists
-    if(!term || term === ""){
+    if(!term || term === "") {
         alert("Please enter a search term");
     } else {
         const url = `https://proxy-itunes-api.glitch.me/search?term=${term}`;
@@ -14,18 +13,17 @@ const updateTerm = () => {
         fetch(url)
             .then((Response) => Response.json())
             .then((data) => {
+                //console.log(data.results);
                 const artists = data.results;
                 return artists.map(result => {
-                // Creates HTML Elements
+                    const article = document.createElement("article"),
+                        artists = document.createElement("p"),
+                        song = document.createElement("h4"),
+                        img = document.createElement("img"),
+                        audio = document.createElement("audio"),
+                        audioSource = document.createElement("source")
 
-                const article = document.createElement("article"),
-                    artists = document.createElement("p"),
-                    song = document.createElement("h4"),
-                    img = document.createElement("img"),
-                    audio = document.createElement("audio"),
-                    audioSource = document.createElement("source"),
-    
-                    //Adds Content
+                    //console.log(result);   
                     artists.innerHTML = result.artistName;
                     song.innerHTML = result.trackName;
                     img.src = result.artworkUrl100;
@@ -39,15 +37,14 @@ const updateTerm = () => {
                     audio.appendChild(audioSource);
     
                     songContainer.appendChild(article);
+                })
             })
-        })
-            .catch(error => console.log("Request failed:", error))
-    }   
+            .catch(error=>console.log("Request failed:", error));
+    }  
 }
-
 const searchBtn = document.getElementById("searchTermBtn");
 searchBtn.addEventListener("click", updateTerm);
-
+            
 document.addEventListener("play", event => {
     const audio = document.getElementsByTagName("audio");
     for(let i = 0; i < audio.length; i++){
@@ -55,5 +52,5 @@ document.addEventListener("play", event => {
             audio[i].pause();
         }
     }
-
+            
 }, true)
