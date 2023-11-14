@@ -5,7 +5,7 @@ const updateTerm = () => {
     if(!term || term === "") {
         alert("Please enter a search term");
     } else {
-        const url = `https://proxy-itunes-api.glitch.me/search?term=${term}`;
+        const url = `https://itunes.apple.com/search?term=${term}`;
         const songContainer = document.getElementById("songs");
         while(songContainer.firstChild){
             songContainer.removeChild(songContainer.firstChild);
@@ -13,9 +13,9 @@ const updateTerm = () => {
         fetch(url)
             .then((Response) => Response.json())
             .then((data) => {
-                //console.log(data.results);
                 const artists = data.results;
                 return artists.map(result => {
+                    // Creates HTML Elements
                     const article = document.createElement("article"),
                         artists = document.createElement("p"),
                         song = document.createElement("h4"),
@@ -23,7 +23,7 @@ const updateTerm = () => {
                         audio = document.createElement("audio"),
                         audioSource = document.createElement("source")
 
-                    //console.log(result);   
+                      //Adds Content  
                     artists.innerHTML = result.artistName;
                     song.innerHTML = result.trackName;
                     img.src = result.artworkUrl100;
@@ -44,6 +44,9 @@ const updateTerm = () => {
 }
 const searchBtn = document.getElementById("searchTermBtn");
 searchBtn.addEventListener("click", updateTerm);
+////searchBtn.addEventListener("keypress", (e) => {
+   // if(e.keyCode === 13) {updateTerm};
+//});
             
 document.addEventListener("play", event => {
     const audio = document.getElementsByTagName("audio");
