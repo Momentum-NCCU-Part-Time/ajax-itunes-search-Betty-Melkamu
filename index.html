@@ -3,20 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="second.js" defer></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <title>Betty's Music Search</title>
     <link rel="icon" type="logo" href="spotify.png" />
   </head>
   <body>
-    <nav>
+    <div>
       <h1>MyTunes</h1>
-      <div>
-        <p>Search for your favorite song</p>
-        <input type ="text" id="searchTerm" />
-        <button id="searchTermBtn">Search</button>
-      </div>
-    </nav>
-    <main id="songs"></main>
+      <br />
+      <p>Search for your favorite musician</p>
+      <span>
+        <input type="text" id="searchTerm" />
+        <button type="submit" id="searchTermBtn">Search</button>
+      </span>
+    </div>
+    <main id="container"></main>
   </body>
 </html>
